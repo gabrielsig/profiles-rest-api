@@ -43,7 +43,6 @@ class UserProfileManager(BaseUserManager):
 
 
 
-
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Represent a 'user profile' inside our system """
 
@@ -71,3 +70,18 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """ Used to convert the object to a string """
         return self.email
+
+
+class ProfileFeedItem(models.Model):
+    """ Profile status updates (feed posts)"""
+
+    # define the user that this post is related to
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    # define the field that stores the post text
+    status_text = models.CharField(max_length=255)
+    # define the date when the post was created
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Resturn the string representation of the model"""
+        return self.status_text
