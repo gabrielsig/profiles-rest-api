@@ -1,8 +1,10 @@
 from django.shortcuts import render
+
 from rest_framework import viewsets
+from rest_framework import status
+from rest_framework import filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 
 from . import serializers
@@ -22,4 +24,9 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
 
     # define the permission class
-    permission_classes = (permissions.UpdateOwnProfile,) 
+    permission_classes = (permissions.UpdateOwnProfile,)
+
+    # define the filter that will be used to search the profiles
+    filter_backends = (filters.SearchFilter,)
+    # define the fields that will be avaliable to serach the profiles in the db
+    search_fields =  ('name', 'email')
