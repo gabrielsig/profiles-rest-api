@@ -59,8 +59,8 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
     # define the serializer class
     serializer_class = serializers.ProfileFeedItemSerializer
     # define the queryset so that the view knows how to retreive the models from the database
-    # queryset = models.ProfileFeedItem.objects.all()
-    queryset = models.ProfileFeedItem.objects.all().order_by('-id')[:10]
+    queryset = models.ProfileFeedItem.objects.all()
+    #queryset = models.ProfileFeedItem.objects.all().order_by('-id')[:10]
     # add the permission classes
     permission_classes = (permissions.PostOwnStatus, IsAuthenticated)
     #permission_classes = (permissions.PostOwnStatus, IsAuthenticatedOrReadOnly)
